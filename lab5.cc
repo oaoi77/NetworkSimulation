@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
         UdpEchoServerHelper echoServer(9);
 
         ApplicationContainer serverApps = echoServer.Install(nodes.Get(serverNode));
-        serverApps.Start(Seconds(2.0));
+        serverApps.Start(Seconds(0.0));
         serverApps.Stop(Seconds(simTime));
 
         UdpEchoClientHelper echoClient(nodeInterfaces.GetAddress(serverNode), 9);
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
         for (uint32_t j = 0; j < i; j++){
             if (j == serverNode) continue;
             ApplicationContainer clientApp = echoClient.Install(nodes.Get(j));
-            clientApp.Start(Seconds(2.0));
+            clientApp.Start(Seconds(0.0));
             clientApp.Stop(Seconds(simTime));
         }
         
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]){
         FlowMonitorHelper flowHelper;
         flowMonitor = flowHelper.InstallAll();
 
-        // Visualizing by NetEnim
+        // Visualizing by NetAnim
         char animfile[100];
         sprintf(animfile, "animation-for-%d-nodes.xml", i);
         AnimationInterface anim(animfile);
